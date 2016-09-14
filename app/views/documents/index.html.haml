@@ -1,7 +1,13 @@
-- @documents.each do |document|
-  %h2= link_to document.title, document
-  %p= time_ago_in_words(document.created_at)
-  %p= truncate(document.content, length:30)
-
-= link_to "New document", new_document_path
-
+.wrapper_with_padding
+  #docs.clearfix
+    - unless @documents.blank?
+      -@documents.each do |document|
+        %a{ href: (url_for [document])}
+          .doc
+            %p.title= document.title
+            %p.date= time_ago_in_words(document.created_at)
+            %p.content= truncate(document.content, length:50)
+    - else
+      %h2 Create your first Document!
+      %p Start creating Documents and accessing them from anywhere!
+      %button= link_to "Create a Document", new_document_path
