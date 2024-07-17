@@ -1,0 +1,7 @@
+<h1>Blog</h1>
+
+<%= @blog_posts.each do |blog_post| %>
+  <h2><%= blog_post.title %></h2>
+  <h3><%= blog_post.updated_at %></h3>
+  <p><%= blog_post.body %></p>
+<% end %>
