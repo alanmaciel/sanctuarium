@@ -1,0 +1,20 @@
+databases:
+  - name: sanctuarium
+    databaseName: sanctuarium
+    user: sanctuarium
+    plan: free
+
+services:
+  - type: web
+    plan: free
+    name: sanctuarium
+    env: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: sanctuarium
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
